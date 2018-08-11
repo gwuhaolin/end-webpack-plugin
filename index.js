@@ -6,10 +6,10 @@ class EndWebpackPlugin {
     }
 
     apply(compiler) {
-        compiler.plugin('done', (stats) => {
+        compiler.hooks.done.tap('EndWebpackPlugin', (stats) => {
             this.doneCallback(stats);
         });
-        compiler.plugin('failed', (err) => {
+        compiler.hooks.failed.tap('EndWebpackPlugin', (err) => {
             this.failCallback(err);
         });
     }
